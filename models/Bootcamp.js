@@ -1,53 +1,50 @@
 const mongoose = require("mongoose");
+
 const BootcampSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: [true, "please add a name"],
+    required: [true, "Please add a name"],
     unique: true,
-    trin: true,
-    maxlength: [50, "Name cannot be more than 50 characters "],
+    trim: true,
+    maxlength: [50, "Name cannot be more than 50 characters"],
   },
   slug: String,
   description: {
     type: String,
-    required: [true, "please add a description"],
-    maxlength: [500, "Name cannot be more than 500 characters "],
+    required: [true, "Please add a description"],
+    maxlength: [500, "Description cannot be more than 500 characters"],
   },
   website: {
     type: String,
     match: [
       /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi,
-      "PLease provide valid url",
+      "Please provide a valid URL",
     ],
   },
   email: {
     type: String,
-
     match: [
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-      "Please provide valid email address",
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+      "Please provide a valid email address",
     ],
   },
   phone: {
     type: String,
-    maxlength: [20, "Phone number can not be longer than 2- characters"],
+    maxlength: [20, "Phone number cannot be longer than 20 characters"],
   },
   address: {
     type: String,
-    required: [false, "please add an address"],
   },
   location: {
     type: {
       type: String,
-      enum: ["point"],
-      required: false,
+      enum: ["Point"],
     },
     coordinates: {
-      type: [[[Number]]],
-      required: false,
+      type: [Number],
       index: "2dsphere",
     },
-    FormattedAddress: {
+    formattedAddress: {
       street: String,
       city: String,
       state: String,
@@ -56,29 +53,30 @@ const BootcampSchema = new mongoose.Schema({
     },
   },
   careers: {
+    type: [String],
+    required: true,
     enum: [
       "Web Development",
       "Mobile Development",
       "UI/UX",
-      "Data Science ",
+      "Data Science",
       "Business",
       "Other",
     ],
   },
-  avageRating: {
+  averageRating: {
     type: Number,
-    min: [1, "Rating must be at least 1"],
-    max: [10, "Rating must can not be more than 10"],
+    max: [10, "Rating cannot be more than 10"],
     default: 0,
   },
-  avageCost: Number,
+  averageCost: Number,
   photo: {
     type: String,
     default: "no-photo.jpg",
   },
   housing: {
-    type: String,
-    Boolean: true,
+    type: Boolean,
+    default: false,
   },
   jobAssistance: {
     type: Boolean,
@@ -97,4 +95,5 @@ const BootcampSchema = new mongoose.Schema({
     default: Date.now,
   },
 });
+
 module.exports = mongoose.model("Bootcamps", BootcampSchema);
