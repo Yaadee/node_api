@@ -13,8 +13,10 @@
     "colors": "^1.4.0",
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
+    "geo-coder": "^1.0.2",
     "mongoose": "^8.8.1",
     "morgan": "^1.10.0",
+    "node-geocoder": "^4.4.0",
     "slugify": "^1.6.6"
   },
   "devDependencies": {
