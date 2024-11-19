@@ -106,12 +106,12 @@ BootcampSchema.pre("save", function (next) {
 // Geocode and create location field
 BootcampSchema.pre("save", async function (next) {
   try {
-    const loc = await geocoder.geocode(this.address);
+    const loc = await geocoder.geocode(this.address);// Take location from address enterd from user to get geo key
     console.log(loc);
     if (loc && loc.length > 0 && loc[0]?.latitude && loc[0]?.longitude) {
       this.location = {
         type: "Point",
-        coordinates: [loc[0].longitude, loc[0].latitude], // Ensure valid coordinates
+        coordinates: [loc[0].longitude, loc[0].latitude],
         formattedAddress: loc[0]?.formattedAddress,
         street: loc[0].streetName,
         city: loc[0].city,
@@ -120,7 +120,6 @@ BootcampSchema.pre("save", async function (next) {
         country: loc[0].countryCode,
       };
     } else {
-      // If geocoding fails, set location to null or handle appropriately
       this.location = null;
     }
 
