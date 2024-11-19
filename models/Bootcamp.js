@@ -37,6 +37,7 @@ const BootcampSchema = new mongoose.Schema({
   address: {
     type: String,
   },
+
   location: {
     type: {
       type: String,
@@ -104,22 +105,30 @@ BootcampSchema.pre("save", function (next) {
 });
 // Geocode and create location field
 BootcampSchema.pre("save", async function (next) {
-  const loc = await geocoder.geocode(this.address);
+  try {
+    const loc = await geocoder.geocode(this.address);// Take location from address enterd from user to get geo key
+    console.log(loc);
+    if (loc && loc.length > 0 && loc[0]?.latitude && loc[0]?.longitude) {
+      this.location = {
+        type: "Point",
+        coordinates: [loc[0].longitude, loc[0].latitude],
+        formattedAddress: loc[0]?.formattedAddress,
+        street: loc[0].streetName,
+        city: loc[0].city,
+        state: loc[0].stateCode,
+        zipcode: loc[0].zipcode,
+        country: loc[0].countryCode,
+      };
+    } else {
+      this.location = null;
+    }
 
-  console.log(loc);
-  this.location = {
-    type: "Point",
-    coordinates: [loc[0].longitude, loc[0].latitude],
-    formattedAddress: loc[0].formattedAddress,
-    street: loc[0].streetName,
-    city: loc[0].city,
-    state: loc[0].stateCode,
-    zipcode: loc[0].zipcode,
-    country: loc[0].countryCode,
-  };
-  //  Do not save address DB
-  this.address = undefined;
-  next();
+    //  Do not save address in DB
+    this.address = undefined;
+    next();
+  } catch (err) {
+    next(err);
+  }
 });
 
 module.exports = mongoose.model("Bootcamps", BootcampSchema);
