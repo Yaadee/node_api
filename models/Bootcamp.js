@@ -47,13 +47,12 @@ const BootcampSchema = new mongoose.Schema({
       type: [Number],
       index: "2dsphere",
     },
-    formattedAddress: {
-      street: String,
-      city: String,
-      state: String,
-      zipcode: String,
-      country: String,
-    },
+    formattedAddress: String,
+    street: String,
+    city: String,
+    state: String,
+    zipcode: String,
+    country: String,
   },
   careers: {
     type: [String],
@@ -105,30 +104,21 @@ BootcampSchema.pre("save", function (next) {
 });
 // Geocode and create location field
 BootcampSchema.pre("save", async function (next) {
-  try {
-    const loc = await geocoder.geocode(this.address);// Take location from address enterd from user to get geo key
-    console.log(loc);
-    if (loc && loc.length > 0 && loc[0]?.latitude && loc[0]?.longitude) {
-      this.location = {
-        type: "Point",
-        coordinates: [loc[0].longitude, loc[0].latitude],
-        formattedAddress: loc[0]?.formattedAddress,
-        street: loc[0].streetName,
-        city: loc[0].city,
-        state: loc[0].stateCode,
-        zipcode: loc[0].zipcode,
-        country: loc[0].countryCode,
-      };
-    } else {
-      this.location = null;
-    }
-
-    //  Do not save address in DB
-    this.address = undefined;
-    next();
-  } catch (err) {
-    next(err);
-  }
+  const loc = await geocoder.geocode(this.address);
+  console.log(loc);
+  this.location = {
+    type: "Point",
+    coordinates: [loc[0]?.longitude, loc[0]?.latitude],
+    formattedAddress: loc[0]?.formattedAddress,
+    street: loc[0]?.streetName,
+    city: loc[0]?.city,
+    state: loc[0]?.stateCode,
+    zipcode: loc[0]?.zipcode,
+    country: loc[0]?.countryCode,
+  };
+  //  Do not save address in DB
+  this.address = undefined;
+  next();
 });
 
 module.exports = mongoose.model("Bootcamps", BootcampSchema);
