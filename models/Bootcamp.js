@@ -47,13 +47,12 @@ const BootcampSchema = new mongoose.Schema({
       type: [Number],
       index: "2dsphere",
     },
-    formattedAddress: {
+    formattedAddress: String,
       street: String,
       city: String,
       state: String,
       zipcode: String,
-      country: String,
-    },
+      country: String
   },
   careers: {
     type: [String],

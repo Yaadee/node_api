@@ -1,21 +1,5 @@
 [
   {
-    "name": "Code Academy",
-    "description": "An intensive bootcamp for aspiring web developers with hands-on projects and career support.",
-    "website": "https://www.codeacademy.com",
-    "phone": "+1-800-123-4567",
-    "email": "info@codeacademy.com",
-    "address": "233 Bay State Rd Boston MA 02215",
-    "careers": ["Web Development", "Data Science"],
-    "averageRating": 9,
-    "averageCost": 15000,
-    "photo": "codeacademy.jpg",
-    "housing": true,
-    "jobAssistance": true,
-    "jobGuarantee": false,
-    "acceptGi": true
-  },
-  {
     "name": "Code with Us",
     "description": "An intensive bootcamp for aspiring web developers with hands-on projects and career support.",
     "website": "https://www.codewithus.com",
@@ -29,38 +13,6 @@
     "housing": true,
     "jobAssistance": true,
     "jobGuarantee": false,
-    "acceptGi": true
-  },
-  {
-    "name": "Tech Innovators Bootcamp",
-    "description": "An intensive bootcamp offering courses in full-stack development and data science.",
-    "website": "https://www.techinnovators.com",
-    "phone": "+1-800-987-6543",
-    "email": "info@techinnovators.com",
-    "address": "456 Innovation Blvd, San Francisco, CA 94107",
-    "careers": ["Web Development", "Data Science", "Mobile Development"],
-    "averageRating": 8,
-    "averageCost": 18000,
-    "photo": "techinnovators.jpg",
-    "housing": false,
-    "jobAssistance": true,
-    "jobGuarantee": true,
-    "acceptGi": false
-  },
-  {
-    "name": "The Coding Dojo",
-    "description": "A comprehensive coding bootcamp focusing on web and mobile app development.",
-    "website": "https://www.codingdojo.com",
-    "phone": "+1-800-111-2222",
-    "email": "info@codingdojo.com",
-    "address": "123 Tech St, Austin, TX 73301",
-    "careers": ["Web Development", "Mobile Development", "UI/UX"],
-    "averageRating": 10,
-    "averageCost": 12000,
-    "photo": "codingdojo.jpg",
-    "housing": true,
-    "jobAssistance": true,
-    "jobGuarantee": true,
     "acceptGi": true
   },
   {
